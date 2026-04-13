@@ -78,32 +78,33 @@ Without Ollama, Dali still works -- memories are stored and text-based search is
 ### 3. Clone, install, and build
 
 ```bash
-git clone https://github.com/linnaxis/dali-public.git
-cd dali-public
+git clone https://github.com/linnaxis/dali-memory.git
+cd dali-memory
 npm install
 npm run build
 ```
 
 ### 4. Configure Claude Code
 
-Add Dali as an MCP server in your Claude Code config. Edit `~/.claude/claude_desktop_config.json` (or your project's `.mcp.json`):
+Add Dali as an MCP server in your Claude Code config. Edit `~/.claude/mcp.json` (or your project's `.mcp.json`):
 
 ```json
 {
   "mcpServers": {
     "dali": {
       "command": "node",
-      "args": ["/absolute/path/to/dali-public/dist/index.js"],
+      "args": ["/absolute/path/to/dali-memory/dist/index.js"],
       "env": {
         "OLLAMA_BASE_URL": "http://localhost:11434",
-        "OLLAMA_MODEL": "nomic-embed-text"
+        "OLLAMA_MODEL": "nomic-embed-text",
+        "DALI_DB_PATH": "~/.claude/dali/dali.db"
       }
     }
   }
 }
 ```
 
-Replace `/absolute/path/to/dali-public` with the actual path where you cloned the repo.
+Replace `/absolute/path/to/dali-memory` with the actual path where you cloned the repo.
 
 ### 5. Verify
 
@@ -149,7 +150,7 @@ Dali uses SQLite with WAL mode and the [sqlite-vec](https://github.com/asg017/sq
 - [MCP SDK](https://github.com/modelcontextprotocol/typescript-sdk) v1.12
 - SQLite via [better-sqlite3](https://github.com/WiseLibs/better-sqlite3)
 - [sqlite-vec](https://github.com/asg017/sqlite-vec) for vector similarity search
-- [Ollama](https://ollama.ai) for local embedding generation
+- [Ollama](https://ollama.com) for local embedding generation
 - [Zod](https://github.com/colinhacks/zod) for input validation
 
 ## License
